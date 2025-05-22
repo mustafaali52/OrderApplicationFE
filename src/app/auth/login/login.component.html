@@ -13,14 +13,14 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput formControlName="password" required>
+                    <input matInput type="password" formControlName="password" required>
                     <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
                         Password is required
                     </mat-error>
             </mat-form-field>
             <div class="error-message" *ngIf="errorMessage"> {{errorMessage}}</div>
             <div class="login-button">
-            <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
                 Login</button>
             </div>  
         </form>

@@ -1,28 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   imports: [
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatMenuModule,
+    CommonModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    CommonModule,
-    RouterLink,
-    RouterLinkActive
+    MatButtonModule,
+    RouterLink
+
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
