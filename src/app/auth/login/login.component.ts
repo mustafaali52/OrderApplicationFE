@@ -29,7 +29,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent {
   errorMessage = '';
-  loginForm;
+  loginForm: ReturnType<FormBuilder['group']>;
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
