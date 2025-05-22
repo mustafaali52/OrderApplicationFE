@@ -1,0 +1,26 @@
+ <mat-toolbar>
+ <ng-container>
+    <a mat-button>Products</a>
+    <a mat-button>Orders</a>
+
+    <ng-container>
+      <a mat-button>Users</a>
+      <a mat-button>All Orders</a>
+    </ng-container>
+
+    <button mat-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </mat-menu>
+  </ng-container>
+
+  <ng-container>
+    <a mat-button routerLink="/login" routerLinkActive="active">Login</a>
+    <a mat-button routerLink="/register" routerLinkActive="active">Register</a>
+  </ng-container>
+</mat-toolbar>
