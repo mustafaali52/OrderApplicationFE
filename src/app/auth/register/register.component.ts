@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { Router, RouterLink } from '@angular/router';
-
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +32,8 @@ export class RegisterComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
       this.registerForm = this.fb.group({
       username: ['', Validators.required],
@@ -43,7 +44,17 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      console.log('Form submitted', this.registerForm.value);
-    };
+      const { username, password, role } = this.registerForm.value;
+      this.authService.register({
+        userName: username!, role: role!, password: password!
+      }).subscribe({
+        next: () => {
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          this.errorMessage = err.error.message || 'Registration failed';
+        }
+      });
+    }
   }
 }
