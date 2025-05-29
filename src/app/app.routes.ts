@@ -10,6 +10,10 @@ export const routes: Routes = [
         loadComponent: () => import('./auth/register/register.component').then(m => m.RegisterComponent)
     },
     {
+        path: 'products',
+        loadComponent: () => import('./product/product-list/product-list.component').then(m => m.ProductListComponent)  
+    },
+    {
         path:'', redirectTo: 'login', pathMatch: 'full'
     },
     {
