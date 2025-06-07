@@ -14,9 +14,9 @@ export const routes: Routes = [
         loadComponent: () => import('./product/product-list/product-list.component').then(m => m.ProductListComponent)  
     },
     {
-        path:'', redirectTo: 'login', pathMatch: 'full'
+        path:'', redirectTo: 'products', pathMatch: 'full'
     },
     {
-        path: '**', redirectTo: 'login' 
+        path: '**', redirectTo: 'products' 
     }
 ];

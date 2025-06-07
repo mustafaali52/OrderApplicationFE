@@ -6,6 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,9 @@ export class LoginComponent {
   errorMessage = '';
   loginForm: ReturnType<FormBuilder['group']>;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, 
+    private authService: AuthService
+    , private router: Router) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -39,6 +43,17 @@ export class LoginComponent {
       return;
     }
     else
-      console.log('Form submitted');
+    {
+      const {username, password} = this.loginForm.value;
+      this.authService.login(username, password).subscribe({
+        next: () => {
+          this.router.navigate(['/products']);
+        },
+        error: (error) => {
+          console.log('Login failed', error);
+          this.errorMessage = 'Invalid username or password';
+        }
+      });
+    }
   }
 }
