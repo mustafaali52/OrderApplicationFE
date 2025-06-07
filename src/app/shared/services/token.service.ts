@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
@@ -6,35 +7,48 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class TokenService {
   private tokenKey = 'authToken';
+  private isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
   setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token); 
+    if (this.isBrowser) {
+      localStorage.setItem(this.tokenKey, token);
+    }
+  }
+
+  getToken(): string | null {
+    return this.isBrowser ? localStorage.getItem(this.tokenKey) : null;
   }
 
   removeToken(): void {
-    localStorage.removeItem(this.tokenKey); 
+    if (this.isBrowser) {
+      localStorage.removeItem(this.tokenKey);
+    }
   }
 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem(this.tokenKey);
-    return !!token; // Returns true if token exists, false otherwise
-  } 
+    return !!this.getToken();
+  }
 
   getUserName(): string | null {
-    if(localStorage) {
+    if (this.isBrowser) {
       const token = localStorage.getItem(this.tokenKey);
       if (!token) {
         return null; // No token found
       }
-      else {
+      
+      try {
         const decodeToken: any = jwtDecode(token);
         return decodeToken.userName || null;
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        return null;
       }
     }
-    else
-      return null; // LocalStorage is not available
+    
+    return null; // Not in browser environment
   }
-
-  constructor() {
-  }
-
 }
