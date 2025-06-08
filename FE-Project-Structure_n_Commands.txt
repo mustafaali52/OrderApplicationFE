@@ -1,0 +1,70 @@
+FOLDER STRUCTURE
+
+order-management-frontend/
+├── src/
+│   ├── app/
+│   │   ├── auth/
+│   │   │   ├── login/
+│   │   │   │   ├── login.component.ts
+│   │   │   │   ├── login.component.html
+│   │   │   │   └── login.component.css
+│   │   │   ├── register/
+│   │   │   │   ├── register.component.ts
+│   │   │   │   ├── register.component.html
+│   │   │   │   └── register.component.css
+│   │   │   └── auth.service.ts
+│   │   ├── products/
+│   │   │   ├── product-list/
+│   │   │   │   ├── product-list.component.ts
+│   │   │   │   ├── product-list.component.html
+│   │   │   │   └── product-list.component.css
+│   │   │   ├── product-add/
+│   │   │   │   ├── product-add.component.ts
+│   │   │   │   ├── product-add.component.html
+│   │   │   │   └── product-add.component.css
+│   │   │   └── products.service.ts
+│   │   ├── orders/
+│   │   │   ├── order-list/
+│   │   │   │   ├── order-list.component.ts
+│   │   │   │   ├── order-list.component.html
+│   │   │   │   └── order-list.component.css
+│   │   │   ├── order-detail/
+│   │   │   │   ├── order-detail.component.ts
+│   │   │   │   ├── order-detail.component.html
+│   │   │   │   └── order-detail.component.css
+│   │   │   └── orders.service.ts
+│   │   ├── admin/
+│   │   │   ├── user-management/
+│   │   │   │   ├── user-management.component.ts
+│   │   │   │   ├── user-management.component.html
+│   │   │   │   └── user-management.component.css
+│   │   │   └── admin.service.ts
+│   │   ├── shared/
+│   │   │   ├── components/
+│   │   │   │   ├── navbar/
+│   │   │   │   │   ├── navbar.component.ts
+│   │   │   │   │   ├── navbar.component.html
+│   │   │   │   │   └── navbar.component.css
+│	│	│	│	└── unauthorized/
+│   │   │   ├── guards/
+│   │   │   │   ├── auth.guard.ts
+│   │   │   │   └── role.guard.ts
+│   │   │   └── interceptors/
+│   │   │       └── auth.interceptor.ts
+│   │   ├── app-routing.module.ts
+│   │   └── app.module.ts
+│   ├── styles.css
+│   └── index.html
+└── angular.json
+
+
+COMMANDS TO BE EXECUTED
+ng add @angular/material
+npm install --force
+npm install @angular/cdk @angular/animations @auth0/angular-jwt --force
+npm cache clean --force 
+npm i jwt-decode --legacy-peer-deps
+
+ng g c login
+ng g c register
+ng g s auth
