@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { Product } from '../../shared/models/product.model';
+import { ProductsService } from '../product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -20,18 +21,20 @@ import { Product } from '../../shared/models/product.model';
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
-  displayedColumns: string[] = ['id', 'name', 'price', 'vendorId'];
-  constructor() { }
+  displayedColumns: string[] = ['name', 'price', 'vendorId'];
+  constructor(private productService: ProductsService) { }
   ngOnInit(): void {
     this.loadProducts();     
   }
 
   loadProducts(): void {
-      const productsData = [
-        { id: 1, name: 'Product 1', price: 100, vendorId: 1 },
-        { id: 2, name: 'Product 2', price: 200, vendorId: 1  },
-        { id: 3, name: 'Product 3', price: 300, vendorId: 1  }
-      ]
-      this.products = productsData;
+    this.productService.getProducts().subscribe({
+      next: (products) => {
+        this.products = products;
+      },
+      error: (err) => {
+        console.error('Failed to load products', err);
+      }
+    });
   }
 }
