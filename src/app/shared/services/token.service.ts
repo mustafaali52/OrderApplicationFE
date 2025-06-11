@@ -51,4 +51,34 @@ export class TokenService {
     
     return null; // Not in browser environment
   }
+ 
+  getUserRole(): string | null {
+    if (this.isBrowser) {
+       const token = this.getToken();
+      if (!token) return '';
+      console.log('here');
+      const decoded: any = jwtDecode(token);
+      console.log(decoded);
+      return decoded.role || '';
+    }
+    return null;
+  }
+
+  isAdmin(): boolean {
+    return this.getUserRole() === 'Admin';
+  }
+
+  isVendor(): boolean {
+    return this.getUserRole() === 'Vendor';
+  }
+
+  isCustomer(): boolean {
+    return this.getUserRole() === 'Customer';
+  }
+
+  isVendorOrAdmin(): boolean {
+    const role = this.getUserRole();
+    return role === 'Vendor' || role === 'Admin';
+  }
+
 }
